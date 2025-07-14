@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4 ms-4">{{ title }}</h2>
+
+<form method="post" class="card p-4 shadow-sm">
+  {{ form.hidden_tag() }}
+
+  <div class="mb-3">
+    {{ form.word.label(class="form-label") }}
+    {{ form.word(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.transcription.label(class="form-label") }}
+    {{ form.transcription(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.description.label(class="form-label") }}
+    {{ form.description(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.translation_1.label(class="form-label") }}
+    {{ form.translation_1(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.translation_2.label(class="form-label") }}
+    {{ form.translation_2(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.root.label(class="form-label") }}
+    {{ form.root(class="form-control") }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.comment.label(class="form-label") }}
+    {{ form.comment(class="form-control", rows=5) }}
+  </div>
+
+  <div class="text-end ms-4">
+    {{ form.submit(class="btn btn-primary") }}
+  </div>
+</form>
+{% endblock %}
