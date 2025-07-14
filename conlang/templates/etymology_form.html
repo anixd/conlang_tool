@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4 ms-3">{{ title }}: <span class="text-muted">{{ word.word }}</span></h2>
+
+<form method="post" class="card p-4 shadow-sm">
+  {{ form.hidden_tag() }}
+
+  <div class="mb-3">
+    {{ form.explanation.label(class="form-label") }}
+    {{ form.explanation(class="form-control", rows=6) }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.comment.label(class="form-label") }}
+    {{ form.comment(class="form-control", rows=4) }}
+  </div>
+
+  <div class="text-end">
+    {{ form.submit(class="btn btn-primary") }}
+  </div>
+</form>
+{% endblock %}

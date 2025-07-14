@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4 ms-3">{{ word.word }}</h2>
+
+<a href="{{ url_for('main.export_single_word', id=word.id) }}" class="btn btn-sm btn-outline-secondary mb-4">Export to Markdown</a>
+
+
+<div class="card mb-4 shadow-sm">
+  <div class="card-body">
+    <ul class="list-unstyled mb-3">
+      <li><strong>Транскрипция:</strong> [{{ word.transcription or '—' }}]</li>
+      <li><strong>Описание:</strong> {{ word.description or '—' }}</li>
+      <li><strong>Корень:</strong> {{ word.root or '—' }}</li>
+    </ul>
+
+    {% if word.translation_1 %}
+    <div class="mb-3">
+      <h6 class="text-muted">Перевод</h6>
+      <div>{{ render_markdown(word.translation_1) | safe }}</div>
+    </div>
+    {% endif %}
+
+    {% if word.translation_2 %}
+    <div class="mb-3">
+      <h6 class="text-muted">Перевод 2</h6>
+      <div>{{ render_markdown(word.translation_2) | safe }}</div>
+    </div>
+    {% endif %}
+
+    {% if word.comment %}
+    <div class="mt-4">
+      <h6 class="text-muted">Комментарий</h6>
+      <div>{{ render_markdown(word.comment) | safe }}</div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% if word.etymologies %}
+  <h4 class="mb-4 ms-3">Этимология: <span class="text-muted">{{ word.word }}</span></h4>
+
+  <div class="list-group mb-3">
+    {% for etymology in word.etymologies %}
+      <div class="list-group-item">
+        <div class="mb-2">
+          <h4 class="text-muted">Объяснение</h4>
+          <div>{{ render_markdown(etymology.explanation) | safe }}</div>
+        </div>
+        {% if etymology.comment %}
+        <div>
+          <h4 class="text-muted">Комментарий</h4>
+          <div>{{ render_markdown(etymology.comment) | safe }}</div>
+        </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <a href="{{ url_for('main.add_etymology', id=word.id) }}" class="btn btn-sm btn-outline-primary ms-3">Добавить этимологию</a>
+
+{% else %}
+  <a href="{{ url_for('main.add_etymology', id=word.id) }}" class="btn btn-sm btn-outline-primary ms-3">Добавить этимологию</a>
+{% endif %}
+
+{% endblock %}

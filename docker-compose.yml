@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  conlang_flask:
+    container_name: conlang_flask
+    image: dockerhub-flask_live_app:1.0.0
+    build: .
+    ports:
+      - "4044:4044"
+    environment:
+      - DB_URL=postgresql://postgres:postgres@conlang_flask_db:5432/postgres
+    depends_on:
+      - flask_db
+  pg:
+    container_name: pg
+    image: postgres:15.13-bullseye
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}

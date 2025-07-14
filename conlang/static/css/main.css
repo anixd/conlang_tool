@@ -1,0 +1,17 @@
+/* Custom styles to complement Bootstrap */
+body {
+    background-color: #ababab;
+}
+.list-group-item h5 {
+    margin-bottom: 0.25rem;
+}
+
+.list-group-item em {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.list-group-item .btn {
+    width: 80px;
+}
+
